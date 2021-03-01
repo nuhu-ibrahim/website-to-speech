@@ -22,14 +22,17 @@ You will need to register with Cloudmersive website [here](https://account.cloud
 You need to first create an acount on the IBM text to speech website [here](https://cloud.ibm.com/registration?target=%2Fdocs%2Ftext-to-speech%2Fgetting-started.html), create an api key and then assign the key to the "ibm_text_to_speech_api_key" variable in the code below.
 
 ## Installing all required packages
-For the python file to work effectively, you need to install the packages below from your command line.
+For the python file to work effectively, you need to install the packages below from your terminal.
 
+```bash
+# Run the following commands on your terminal.
 pip install cloudmersive-validate-api-client
 pip install cloudmersive-image-api-client
 pip install --upgrade "ibm-watson>=5.0.0"
 pip install playsound
 pip install -U PyObjC
 pip install pathlib
+```
 
 ## Running the program
 ```bash

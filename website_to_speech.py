@@ -109,7 +109,7 @@ def playing_sound():
 # argparse makes writing reasonably robust command line tools pretty easy.
 
 if __name__ == '__main__':
-    # Importing here is not standard, but convenient for this assignment.
+    # Importing here is not standard, but convenient for this work.
     import argparse
     parser = argparse.ArgumentParser(description='Converts a webpage to speech')
     parser.add_argument('website', type=str, default='https://nuhuibrahim.com', nargs='?',

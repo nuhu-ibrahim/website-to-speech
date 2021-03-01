@@ -24,7 +24,9 @@ You need to first create an acount on the IBM text to speech website [here](http
 ## Running the program
 ```bash
 # Run the following commands on your terminal from the project root directory.
-python3 website_to_speech.py <URL>
+python3 website_to_speech.py URL
+
+#URL is the web address of the page whose prediction you want to listen to aloud.
 
 # ...and that is all.
 ```

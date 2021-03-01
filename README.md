@@ -13,13 +13,13 @@ Appreciation to the [Public APIs Github Repository](https://github.com/public-ap
 
 ## Setting up the API Keys
 ### Part 1: Converting a website to an image
-You will need to create an account with restpack [here](https://restpack.io/console/register) and then assign your access token to the "restpack_api_key" variable in the code.
+You will need to create an account with restpack [here](https://restpack.io/console/register) and then assign your access token to the "restpack_key" variable in the code.
 
 ### Part 2: Automatically describing the image using a simple caption
-You will need to register with Cloudmersive website [here](https://account.cloudmersive.com/signup), create an api key and assign it to the "cloudmersive_api_key" variable in the code.
+You will need to register with Cloudmersive website [here](https://account.cloudmersive.com/signup), create an api key and assign it to the "cloudmersive_key" variable in the code.
 
 ### Part 3: Converting the caption into an audio so that it could be read aloud
-You need to first create an acount on the IBM text to speech website [here](https://cloud.ibm.com/registration?target=%2Fdocs%2Ftext-to-speech%2Fgetting-started.html), create an api key and then assign the key to the "ibm_text_to_speech_api_key" variable in the code below.
+You need to first create an acount on the IBM text to speech website [here](https://cloud.ibm.com/registration?target=%2Fdocs%2Ftext-to-speech%2Fgetting-started.html), create an api key and then assign the key to the "ibm_text_to_speech_key" variable in the code below. You may also need to get the service url and assign it to the ibm_service_url variable
 
 ## Installing all required packages
 For the python file to work effectively, you need to install the packages below from your terminal.

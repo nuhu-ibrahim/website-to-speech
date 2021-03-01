@@ -10,3 +10,11 @@ The goal of this project is to develop a python script that:
 This project aims to assist visually impaired people in gaining a general overview of a website so that they can infer if the website is worth spending time on or not. It is generally known that it takes a long time for people with visual impairment to go through a webpage completely.
 
 Appreciation to the [Public APIs Github Repository](https://github.com/public-apis/public-apis.git) as all the APIs used in this project was first found there.
+
+## Running the program
+```bash
+# Run the following commands on your terminal from the project root directory.
+python3 website_to_speech.py <URL>
+
+# ...and that is all.
+```

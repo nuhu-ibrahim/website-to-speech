@@ -1,6 +1,7 @@
 *.jpg
 *.wav
 !apology.wav
+!malformed_website.wav
 *.DS_Store
 .ipynb_checkpoints
 */.ipynb_checkpoints/*

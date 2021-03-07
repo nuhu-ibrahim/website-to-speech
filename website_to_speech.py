@@ -16,6 +16,12 @@ from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
 from pathlib import Path
 from playsound import playsound
 
+# Checking if url is valid
+import validators
+
+def validate_website(website):
+    return validators.url(website)
+
 def convert_website_to_image(restpack_api_key, website_to_predict):
     headers = {
         'Content-Type': 'application/json',
@@ -36,7 +42,7 @@ def convert_website_to_image(restpack_api_key, website_to_predict):
     response = requests.post(url, headers=headers, params={}, data=json.dumps(payload))
 
     if response.status_code != 200:
-        return False, "Sorry, an error occureed while converting webpage to image using Restpack, please try again."
+        return False, "Sorry, an error occureed while converting webpage to image, please try again."
     else:
         response.raise_for_status()
 
@@ -116,20 +122,28 @@ if __name__ == '__main__':
     args = parser.parse_args()
     website = args.website
 
-    restpack_key = 'Restpack API Key'
-    cloudmersive_key = 'Cloudmersive API Key'
-    ibm_text_to_speech_key = 'IBM API Key'
-    ibm_service_url = 'IBM Service URL'
+    # restpack_key = 'Restpack API Key'
+    # cloudmersive_key = 'Cloudmersive API Key'
+    # ibm_text_to_speech_key = 'IBM API Key'
+    # ibm_service_url = 'IBM Service URL'
 
-    restpack_condition, restpack_text = convert_website_to_image(restpack_key, website)
-    if restpack_condition:
-        cloudmersive_text = predict_image_to_caption(cloudmersive_key)
-        if text_to_voice(ibm_text_to_speech_key, ibm_service_url, cloudmersive_text):
-            playing_sound("audio.wav")
-        else:
-            playing_sound("apology.wav")
+    restpack_key = 'Ulwu11xJs1O7VCuTVtALUmGoL2htvwPaD4t4SJbVdwfH1uQ6'
+    cloudmersive_key = 'af5cf153-ba23-4b81-985f-aec482141d98'
+    ibm_text_to_speech_key = 'Ea1FukVpYfI-O6iOPRyzgSFk7K1Z4HDjGpf8vDg6lY4j'
+    ibm_service_url = 'https://api.eu-gb.text-to-speech.watson.cloud.ibm.com/instances/ae2db9df-e549-449c-a8bd-851130217ed0'
+
+    if(validate_website(website) != True):
+        playing_sound("malformed_website.wav")
     else:
-        if text_to_voice(ibm_text_to_speech_key, ibm_service_url, restpack_text):
-            playing_sound("audio.wav")
+        restpack_condition, restpack_text = convert_website_to_image(restpack_key, website)
+        if restpack_condition:
+            cloudmersive_text = predict_image_to_caption(cloudmersive_key)
+            if text_to_voice(ibm_text_to_speech_key, ibm_service_url, cloudmersive_text):
+                playing_sound("audio.wav")
+            else:
+                playing_sound("apology.wav")
         else:
-            playing_sound("apology.wav")
+            if text_to_voice(ibm_text_to_speech_key, ibm_service_url, restpack_text):
+                playing_sound("audio.wav")
+            else:
+                playing_sound("apology.wav")

@@ -1,5 +1,6 @@
 *.jpg
 *.wav
+!apology.wav
 *.DS_Store
 .ipynb_checkpoints
 */.ipynb_checkpoints/*

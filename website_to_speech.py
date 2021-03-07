@@ -36,8 +36,7 @@ def convert_website_to_image(restpack_api_key, website_to_predict):
     response = requests.post(url, headers=headers, params={}, data=json.dumps(payload))
 
     if response.status_code != 200:
-        print("Sorry, an error occureed while converting webpage to image using Restpack, please try again.")
-        return False
+        return False, "Sorry, an error occureed while converting webpage to image using Restpack, please try again."
     else:
         response.raise_for_status()
 
@@ -49,7 +48,7 @@ def convert_website_to_image(restpack_api_key, website_to_predict):
 
         open('website-image.jpg', 'wb').write(r.content)
 
-    return True
+    return True, ""
 
 def predict_image_to_caption(cloudmersive_api_key):
     # Configure API key authorization: Apikey
@@ -74,7 +73,7 @@ def predict_image_to_caption(cloudmersive_api_key):
     except Exception as e:
         prediction = "Sorry, an error occured while we were trying to guess the content of the page. Please try again."
 
-    return True, prediction
+    return prediction
 
 def text_to_voice(ibm_text_to_speech_api_key, service_url, prediction):
     authenticator = IAMAuthenticator(ibm_text_to_speech_api_key)
@@ -95,11 +94,10 @@ def text_to_voice(ibm_text_to_speech_api_key, service_url, prediction):
 
         return True
     except Exception as ex:
-        print("Sorry, we were unable to convert your website to speech, please try again.")
         return False
 
-def playing_sound():
-    path = str(Path("audio.wav").resolve())
+def playing_sound(audio_path):
+    path = str(Path(audio_path).resolve())
     path = path.replace(" ", "%20")
 
     playsound(path)
@@ -113,7 +111,7 @@ if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(description='Converts a webpage to speech')
     parser.add_argument('website', type=str, default='https://nuhuibrahim.com', nargs='?',
-                    help='The web address of the page you will like to predict')
+                    help='The web address of the page whose prediction you will like to listen to.')
 
     args = parser.parse_args()
     website = args.website
@@ -123,8 +121,15 @@ if __name__ == '__main__':
     ibm_text_to_speech_key = 'IBM API Key'
     ibm_service_url = 'IBM Service URL'
 
-    if convert_website_to_image(restpack_key, website):
-        condition, text = predict_image_to_caption(cloudmersive_key)
-        if condition:
-            if text_to_voice(ibm_text_to_speech_key, ibm_service_url, text):
-                playing_sound()
+    restpack_condition, restpack_text = convert_website_to_image(restpack_key, website)
+    if restpack_condition:
+        cloudmersive_text = predict_image_to_caption(cloudmersive_key)
+        if text_to_voice(ibm_text_to_speech_key, ibm_service_url, cloudmersive_text):
+            playing_sound("audio.wav")
+        else:
+            playing_sound("apology.wav")
+    else:
+        if text_to_voice(ibm_text_to_speech_key, ibm_service_url, restpack_text):
+            playing_sound("audio.wav")
+        else:
+            playing_sound("apology.wav")

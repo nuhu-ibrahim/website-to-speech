@@ -32,6 +32,7 @@ pip install --upgrade "ibm-watson>=5.0.0"
 pip install playsound
 pip install -U PyObjC
 pip install pathlib
+pip install validators
 ```
 
 ## Running the program
